@@ -1,0 +1,415 @@
+/* ======================================================================================================================== */
+/* RESET E ESTILO GLOBAL         */
+/* ======================================================================================================================== */
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%; /* Garante que a altura seja 100% da viewport */
+    display: flex;
+    flex-direction: column; /* Configura o layout vertical */
+}
+
+body {
+    font-family: 'Teko', sans-serif; /* Fonte principal */
+    background: linear-gradient(135deg, #1c1e26, #232635, #2b3050, #37406a, #2b3050, #232635, #1c1e26); /* Tons escuros e azulados */
+    background-size: 300% 300%; /* Amplitude no gradiente */
+    animation: gradient-shift 20s ease-in-out infinite; /* Movimento fluido */
+    color: #dcddde; /* Texto claro */
+}
+
+@keyframes gradient-shift {
+    0% {
+        background-position: 0% 0%;
+    }
+    25% {
+        background-position: 50% 25%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    75% {
+        background-position: 50% 75%;
+    }
+    100% {
+        background-position: 0% 100%;
+    }
+}
+
+body.light-mode {
+    background: linear-gradient(135deg, #f5f5f7, #e4dff7, #d3c8f7, #c7b3f0, #d3c8f7, #e4dff7, #f5f5f7); /* Tons suaves */
+    background-size: 300% 300%;
+    animation: gradient-shift 20s ease-in-out infinite; /* Mesmo movimento */
+    color: #4a4a4a; /* Texto escuro */
+}
+
+/* ======================================================================================================================== */
+/* CONTAINER PRINCIPAL           */
+/* ======================================================================================================================== */
+.container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ======================================================================================================================== */
+/* CABEÇALHO (HEADER)            */
+/* ======================================================================================================================== */
+.header {
+    position: sticky;
+    top: 0; /* Sempre ficará visível a partir do topo */
+    z-index: 1000; /* Garante que fique acima de outros elementos */
+    display: flex;
+    justify-content: center; /* Espaço entre logo e menu */
+    align-items: center;
+    background: #36393f; /* Fundo escuro estilo Discord */
+    padding: 0rem 1rem;
+    color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    flex-shrink: 0;
+}
+
+.logo {
+    position: absolute;
+    top: 0; /* Posicionada no topo do cabeçalho */
+    left: 0; /* Alinhada à esquerda */
+    z-index: 10; /* Garante visibilidade */
+}
+
+.logo img {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%; /* Torna a logo circular */
+    border: 10px solid #36393f; /* Borda escura */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+.logo img:hover {
+    transform: scale(1.1); /* Zoom ao passar o mouse */
+}
+
+/* ======================================================================================================================== */
+/* MENU E SUBMENU                */
+/* ======================================================================================================================== */
+.menu {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+    position: relative;
+}
+
+.menu li {
+    position: relative;
+}
+
+.menu a {
+    text-decoration: none;
+    color: #b9bbbe;
+    font-size: 1.3rem;
+    padding: 0.1rem 1rem;
+    border-radius: 5px;
+    transition: background 0.3s, color 0.3s;
+}
+
+.menu a:hover {
+    background: rgba(88, 101, 242, 0.6);
+    color: #fff;
+}
+
+.submenu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: rgba(54, 57, 63, 0.9); /* Fundo com transparência */
+    list-style: none;
+    padding: 0.5rem 0;
+    border-radius: 8px; /* Bordas suaves */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Sombra para destacar o submenu */
+    z-index: 10; /* Garante que fique sobre outros elementos */
+    transition: opacity 0.3s ease, transform 0.3s ease; /* Transições suaves */
+    opacity: 0; /* Invisível por padrão */
+    transform: translateY(-10px); /* Deslocado levemente para cima */
+}
+
+.submenu li {
+    padding: 0.5rem 1rem;
+    white-space: nowrap;
+}
+
+.submenu a {
+    color: #b9bbbe;
+    font-size: 1rem;
+    text-decoration: none;
+}
+
+.submenu a:hover {
+    background: rgba(88, 101, 242, 0.6);
+    color: #fff;
+    border-radius: 5px; /* Bordas arredondadas nos itens */
+}
+
+.menu li:hover .submenu {
+    display: block;
+    opacity: 1; /* Torna visível */
+    transform: translateY(0); /* Move para a posição normal */
+}
+
+/* ======================================================================================================================== */
+/* BARRA DE PESQUISA MINIMALISTA */
+/* ======================================================================================================================== */
+.search-bar {
+    display: flex;
+    align-items: center;
+    background: #40444b;
+    border-radius: 20px;
+    padding: 0 0.5rem;
+    height: 35px;
+    max-width: 150px; /* Define o tamanho da barra */
+    overflow: hidden;
+    transition: all 0.3s ease;
+    position: absolute;
+    right: 5rem;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.search-bar input {
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #fff;
+    font-size: 1rem;
+    margin-left: 0.5rem;
+    flex: 1;
+    width: 100%;
+}
+
+.search-bar input::placeholder {
+    color: #b9bbbe;
+    font-size: 0.9rem;
+}
+
+.search-bar button {
+    background: none;
+    border: none;
+    color: #b9bbbe;
+    font-size: 0.1rem;
+    cursor: pointer;
+}
+
+.search-bar button:hover {
+    color: #5865f2;
+}
+
+/* ======================================================================================================================== */
+/* BOTAO DE TEMA         */
+/* ======================================================================================================================== */
+
+.theme-toggle {
+    background: none;
+    border: none;
+    color: #b9bbbe;
+    font-size: 2rem;
+    cursor: pointer;
+    transition: color 0.5s;
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* ======================================================================================================================== */
+/* FEED                  */
+/* ======================================================================================================================== */
+
+.feed-direito{
+    position: fixed; /* Mantém o feed sempre visível */
+    top: 70px; /* Alinhado abaixo do cabeçalho */
+    right: 1rem; /* Encosta no lado direito */
+    width: 300px; /* Define a largura fixa do feed direito */
+    height: calc(100vh - 100px); /* Ajusta a altura para ocupar a tela menos a área do cabeçalho */
+    background: #40444b;
+    color: #dcddde;
+    overflow-y: auto;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    scroll-behavior: smooth; /* Para rolagem suave */
+    scrollbar-width: none; /* Esconde a barra de rolagem */
+    -ms-overflow-style: none; /* Compatível com IE e Edge */
+    z-index: -900; /* Garante que o feed seja visível, mas abaixo do cabeçalho */
+}
+body.light-mode .feed-direito{
+    background: #eaeaea;
+    color: #4a4a4a;
+}
+
+/* ======================================================================================================================== */
+/* FEED   ESQUERDA               */
+/* ======================================================================================================================== */
+
+.feed-esquerdo {
+    position: fixed; /* Mantém o feed sempre visível */
+    top: 70px; /* Alinhado abaixo do cabeçalho */
+    left: 1rem; /* Encosta no lado esquerdo */
+    width: 300px; /* Define a largura fixa do feed esquerdo */
+    height: calc(100vh - 100px); /* Ajusta a altura para ocupar a tela menos a área do cabeçalho */
+    background: #40444b;
+    color: #dcddde;
+    overflow-y: auto;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    scroll-behavior: smooth; /* Para rolagem suave */
+    scrollbar-width: none; /* Esconde a barra de rolagem */
+    -ms-overflow-style: none; /* Compatível com IE e Edge */
+    z-index: -900; /* Garante que o feed seja visível, mas abaixo do cabeçalho */
+}
+
+body.light-mode .feed-esquerdo {
+    background: #eaeaea;
+    color: #4a4a4a;
+}
+
+/* ======================================================================================================================== */
+/* CONTEÚDO PRINCIPAL            */
+/* ======================================================================================================================== */
+.main-content {
+    flex: 1;
+    margin-right: 300px; /* Ajuste para o espaço do feed */
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    scrollbar-width: none; /* Esconde a barra de rolagem */
+    -ms-overflow-style: none; /* Compatível com IE e Edge */
+}
+
+.main-content::-webkit-sc.rollbar {
+    display: none; /* Chrome, Safari e outros baseados em WebKit */
+}
+
+/* ======================================================================================================================== */
+/* SEÇÕES DE ARTIGOS             */
+/* ======================================================================================================================== */
+section {
+    width: 800px;
+    height: 180px;
+    padding: 1rem;
+    margin: 0.5rem auto; /* Centraliza horizontalmente */
+    background: #40444b;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    display: flex;
+    gap: 1rem;
+    border: 2px solid transparent;
+    transition: border-color 0.3s ease-in-out;
+    
+}
+
+body.light-mode section {
+    background: #eaeaea;
+    border: 2px solid transparent;
+}
+
+section:hover {
+    border-color: #6d6f78;
+}
+
+body.light-mode section:hover {
+    border-color: #c0c2c5;
+}
+
+section img {
+    width: 292px;
+    height: 179px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 10px;
+}
+
+section .content {
+    flex: 1;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #dcddde;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+body.light-mode section .content {
+    color: #4a4a4a;
+}
+
+/* ======================================================================================================================== */
+/* RODAPÉ                        */
+/* ======================================================================================================================== */
+footer {
+    flex-shrink: 0; /* Garante que o rodapé não encolha */
+    width: 100%; /* Largura total */
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+}
+
+.footer-section {
+    flex: 1;
+    margin: 10px;
+    min-width: 200px;
+}
+
+.footer-section h3 {
+    font-size: 18px;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.footer-section p, .footer-section ul li {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #ddd;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section ul li a {
+    color: #ddd;
+    text-decoration: none;
+}
+
+.footer-section ul li a:hover {
+    color: #fff;
+}
+
+.footer-bottom {
+    margin-top: 30px;
+    font-size: 14px;
+    border-top: 1px solid #444;
+    padding-top: 20px;
+    color: #bbb;
+}
+
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-section {
+        margin: 20px 0;
+    }
+}
+
+
